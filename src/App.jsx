@@ -25,7 +25,8 @@ function App() {
       <PublicRoute path="/login" exact component={Login}/>
       <PublicRoute path="/register" exact component={Register}/>
       <PrivateRoute path="/" exact component={()=>(<Redirect to="/dispositivos"/>)}/>
-      <PrivateRoute path="/dashboard/:id" component={Dashboard}/>
+      <PrivateRoute path="/dashboard/:id" exact component={Dashboard}/>
+      <PrivateRoute path="/dashboard/:id/view/:idView" component={Dashboard}/>
       <PrivateRoute path="/modelos" exact component={Models}/>
       <PrivateRoute path="/modelos/:id" component={Models}/>
       <PrivateRoute path="/dispositivos" exact component={Devices}/>

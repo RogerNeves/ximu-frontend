@@ -5,6 +5,7 @@ import NavBar from '../../components/NavBar'
 import AddButton from '../../components/AddButton'
 import BarChart from '../../components/BarChart'
 import LineChart from '../../components/LineChart'
+import ViewForm from '../../components/ViewForm'
 
 
 
@@ -12,6 +13,7 @@ import LineChart from '../../components/LineChart'
 export default class Dashboard extends Component {
   constructor(props) {
     super(props)
+    this.idView =  props.match.params.idView || null
     this.id = props.match.params.id || null
     this.backEndApi = new BackEndApi()
     this.state = {
@@ -37,6 +39,7 @@ export default class Dashboard extends Component {
               switch (view.type) {
                 case 'gauge':
                 //return (<Gauge view={view} key={index} />)
+                break
                 case 'bar':
                   return (<BarChart view={view} key={index} />)
                   break
@@ -45,12 +48,14 @@ export default class Dashboard extends Component {
                   break
                 case 'radar':
                 //return (<RadarChart view={view} key={index} />)
+                break
                 default:
                   return 0;
               }
             })}
-            <AddButton path='/view' />
+            <AddButton path={`${this.id}/view`} />
           </div>
+          {this.idView && (<ViewForm idView={this.idView} idDashboard={this.id}/>)}
         </section>
       </React.Fragment>)
   }

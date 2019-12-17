@@ -103,7 +103,7 @@ export default class DevicesForm extends Component {
         <DialogBoxBackground close={close} />
         <div className="add-form">
           <form onSubmit={this.sendDevice.bind(this)} className="add-form">
-            <input type="text" name="name" id="add-name"value={device.name} required onChange={this.changeDevicesStateValue.bind(this)} />
+            <input type="text" name="name" id="add-name" value={device.name} required onChange={this.changeDevicesStateValue.bind(this)} />
             <select value={device.IdModels || 0} name="IdModels" required onChange={this.changeDevicesStateValue.bind(this)}>
               <option value={0}>Selecione um modelo</option>
               {models.map((model, index) => (
