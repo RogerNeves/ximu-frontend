@@ -1,0 +1,33 @@
+.item{
+    width: 400px;
+    height: 200px;
+    margin: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: #aaa 1px solid;
+}
+
+.item h2,
+.item h3,
+.item p{
+    margin: 5px 0;
+}
+
+.item p{
+    font-size: 11px;
+}
+
+.item h2{
+    text-align: center;
+
+}
+
+.div-dados{
+    height: 120px;
+    width: 400px;
+    box-sizing: border-box;
+    overflow: auto;
+}

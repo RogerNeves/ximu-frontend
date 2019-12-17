@@ -1,0 +1,11 @@
+.add-button{
+    display: block;
+    width: 400px;
+    height: 200px;
+    margin: 5px;
+    text-align: center;
+    font-size: 70px;
+    background: #fff;
+    outline: none;
+    border: #aaa 1px solid;
+}
