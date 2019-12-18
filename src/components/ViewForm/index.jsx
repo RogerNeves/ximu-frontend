@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import {Link} from 'react-router-dom'
 import DialogBoxBackground from '../DialogBoxBackground'
 import GaugeForm from '../GaugeForm'
 import BarForm from '../BarForm'
@@ -46,6 +47,7 @@ export default class ViewForm extends Component {
         <DialogBoxBackground close={`dashboard/${this.idDashboard}`}/>
         <form action="" className="add-form view-form">
           <input type="text" value={name} name="name" id="add-name" placeholder="Nome da visualização" onChange={this.handleStateChange.bind(this)}/>
+          <div className="view-container">
           <div className="div-form">
             <p>Tipo de Gráfico: </p>
             <select value={type} name="type" onChange={this.handleStateChange.bind(this)}>
@@ -56,6 +58,11 @@ export default class ViewForm extends Component {
             </select>
           </div>
           { this.form() }
+          </div>
+          <div className="buttons">
+            <input type="submit" value="Salvar" className="save-button"/>
+            <Link to="/modelos" className="cancel-button">Cancelar</Link>
+          </div>
         </form>
       </Fragment>
     );

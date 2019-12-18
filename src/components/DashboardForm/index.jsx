@@ -34,7 +34,7 @@ export default class DashboardForm extends Component {
       <Fragment>
         <form onSubmit={this.submitDashboard.bind(this)} className="dashboard-form">
           <input type="text" name="name" value={this.state.name} onChange={this.changeName.bind(this)}/>
-          <div className="buttons">
+          <div className="buttons-mini">
           <input type="submit" value="Salvar"/>
           <button onClick={this.ChangeDashboardFrom}>Cancelar</button>
           </div>

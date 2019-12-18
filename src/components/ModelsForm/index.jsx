@@ -27,7 +27,7 @@ export default class ModelsForm extends Component {
   }
 
   async componentDidMount() {
-    if (this.id != 'new') {
+    if (this.id !== 'new') {
       const resp = await this.backEndApi.getModel(this.id)
       if (resp.success) {
         this.setState({
@@ -108,7 +108,7 @@ export default class ModelsForm extends Component {
       <Fragment>
         <DialogBoxBackground close="modelos"/>
         <form onSubmit={this.submitModel.bind(this)} className="add-form">
-          <div>
+          
             <input type="text" name="name" id="add-name" placeholder="Nome do modelo" value={model.name} onChange={this.changeModel.bind(this)} />
             <h3>Dados:</h3>
             <div className="data-form">
@@ -127,10 +127,10 @@ export default class ModelsForm extends Component {
             ))}
             <button className="button-add-type" onClick={this.AddData.bind(this)} >+</button>
             </div>
-          </div>
+          
           <div className="buttons">
-            <input type="submit" value="Salvar" />
-            <Link to="/modelos">Cancelar</Link>
+            <input type="submit" value="Salvar" className="save-button"/>
+            <Link to="/modelos" className="cancel-button">Cancelar</Link>
           </div>
         </form>
       </Fragment>

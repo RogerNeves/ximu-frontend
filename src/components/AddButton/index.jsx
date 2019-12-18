@@ -9,7 +9,7 @@ export default class AddButton extends Component {
   render() {
     return (
       <Fragment>
-        <Link className='add-button' to={`${this.path}/new`}> + </Link>
+        <Link className='add-button' to={`${this.path}/new`}>+</Link>
       </Fragment>
     )
   }

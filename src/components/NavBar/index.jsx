@@ -43,19 +43,19 @@ export default class NavBar extends Component {
           <div className="dashboard col12">
             <DashboardList dashboardList={dashboardList} attList={this.attList.bind(this)}/>
             <div className="height divHeader borderHeader">
-              <p className="pHeader" onClick={this.ChangeDashboardFrom.bind(this)}>+</p>
+              <p className="pHeader add-dashboard" onClick={this.ChangeDashboardFrom.bind(this)}>+</p>
               {addDashboard && (<DashboardForm ChangeDashboardFrom={this.ChangeDashboardFrom.bind(this)}/>)}
             </div>
           </div>
         </div>
         <div className="col12 baixo">
           <div className="config">
-            <div className="height divHeader borderHeader col12">
-              <Link to='/modelos'><p className="pHeader">M</p></Link>
-            </div>
-            <div className="height divHeader borderHeader col12">
-              <Link to='/dispositivos'><p className="pHeader">D</p></Link>
-            </div>
+            <Link to='/modelos' className="height divHeader borderHeader col12">
+              <p className="pHeader">M</p>
+            </Link>
+            <Link to='/dispositivos' className="height divHeader borderHeader col12">
+              <p className="pHeader">D</p>
+            </Link>
           </div>
         </div>
       </header>

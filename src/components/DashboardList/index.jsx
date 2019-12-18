@@ -26,9 +26,9 @@ export default class DashboardList extends Component {
       <div className="grupos col12 divHeader">
         {dashboardList.map((dashboard, index) => (
           <Fragment key={index}>
-            <div className="height col12 divHeader borderHeader" id={dashboard.id}>
-              <Link to={`/dashboard/${dashboard.id}`} className="pHeader col6">{dashboard.name.slice(0, 1).toUpperCase()}</Link>
-            </div>
+            <Link to={`/dashboard/${dashboard.id}`} className="height col12 divHeader borderHeader pHeader" id={dashboard.id}>
+              {dashboard.name.slice(0, 1).toUpperCase()}
+            </Link>
           </Fragment>
         )
         )

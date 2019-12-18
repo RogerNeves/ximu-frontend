@@ -97,7 +97,6 @@ export default class DevicesForm extends Component {
   render() {
     const { close } = this
     const { mqttTest, mqtt, models, device } = this.state
-    console.log(device)
     return (
       <Fragment>
         <DialogBoxBackground close={close} />
@@ -114,21 +113,21 @@ export default class DevicesForm extends Component {
               <input type='checkbox' checked={mqttTest} name="mqttTest" onChange={this.changeMqttTest.bind(this)} />
               <p>Mqtt</p>
             </div>
-            <div className='data-form'>
+            <div className='mqtt-form'>
               {mqttTest &&
                 (<Fragment>
-                  <input type="text" placeholder='url do broker' value={mqtt.url} onChange={this.changeMqttStateValue.bind(this)} />
-                  <input type="number" placeholder='porta' value={mqtt.port} onChange={this.changeMqttStateValue.bind(this)} />
-                  <input type="text" placeholder='topico' value={mqtt.topic} onChange={this.changeMqttStateValue.bind(this)} />
-                  <input type="text" placeholder='cliente' value={mqtt.clienteId} onChange={this.changeMqttStateValue.bind(this)} />
-                  <input type="text" placeholder='usuario' name="usuario" autoComplete="off" value={mqtt.username} onChange={this.changeMqttStateValue.bind(this)} />
-                  <input type="text" placeholder='password' name="password" autoComplete="off" value={mqtt.password} onChange={this.changeMqttStateValue.bind(this)} />
+                  <input type="text" className="input-mqtt-form" placeholder='url do broker' name="url" value={mqtt.url} onChange={this.changeMqttStateValue.bind(this)} />
+                  <input type="number" className="input-mqtt-form" placeholder='porta' name="port" value={mqtt.port} onChange={this.changeMqttStateValue.bind(this)} />
+                  <input type="text" className="input-mqtt-form" placeholder='topico' name="topic" value={mqtt.topic} onChange={this.changeMqttStateValue.bind(this)} />
+                  <input type="text" className="input-mqtt-form" placeholder='cliente' name="clienteId" value={mqtt.clienteId} onChange={this.changeMqttStateValue.bind(this)} />
+                  <input type="text" className="input-mqtt-form" placeholder='usuario' name="username" autoComplete="off" value={mqtt.username} onChange={this.changeMqttStateValue.bind(this)} />
+                  <input type="text" className="input-mqtt-form" placeholder='password' name="password" autoComplete="off" value={mqtt.password} onChange={this.changeMqttStateValue.bind(this)} />
                 </Fragment>)
               }
             </div>
             <div className='buttons'>
-              <input type="submit" value="salvar" />
-              <Link to="/dispositivos">cancelar</Link>
+              <input type="submit" value="salvar" className="save-button" />
+              <Link to="/dispositivos" className="cancel-button">cancelar</Link>
             </div>
           </form>
         </div>
