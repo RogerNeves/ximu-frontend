@@ -19,6 +19,16 @@ export default class RadarForm extends Component {
     }
   }
 
+  async submitRadarForm(){
+    const {view} = this.props
+    const {radar} = this.state
+    const { type, idDevice1, idDevice2, modelsData, divider } = radar
+    const {name} = view
+    if( type || modelsData || idDevice1 || idDevice2 || divider || name){
+      const response = await this.backEndApi.postRadar( view , radar )
+    }
+  }
+
   changeRadarStateValue(e) {
     const { name, value } = e.target
     let { radar } = this.state

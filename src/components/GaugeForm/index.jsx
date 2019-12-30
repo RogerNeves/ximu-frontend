@@ -25,6 +25,17 @@ export default class GaugeForm extends Component {
     };
   }
 
+  async submitGaugeForm(){
+    const {view} = this.props
+    const {gauge} = this.state
+    const { type, idDevice, modelsData, min, max } = gauge
+    const {name} = view
+    if( type || modelsData || idDevice || min || max || name){
+      const response = await this.backEndApi.postGauge( view , gauge )
+    }
+  }
+
+
   changeGaugeStateValue(e) {
     const { name, value } = e.target;
     let { gauge } = this.state;

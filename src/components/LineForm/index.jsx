@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 
-// import { Container } from './styles';
+import BackEndApi from '../../BackEndApi'
+
 
 export default class LineForm extends Component {
   constructor(props){
     super(props)
-    this.view = props.view
+    this.backEndApi = new BackEndApi();
     this.state = {
       line:{
       type:undefined,
@@ -15,6 +16,16 @@ export default class LineForm extends Component {
       },
       devices:[{id:1,name:"casa"},{id:2,name:"estufa"}],
       modelsData:[{id:1,name:"temperatura"},{id:2,name:"humidade"}]
+    }
+  }
+
+  async submitLineForm(){
+    const {view} = this.props
+    const {line} = this.state
+    const { type, idDevice, modelsData, divider } = line
+    const {name} = view
+    if( type || modelsData || idDevice || divider || name){
+      const response = await this.backEndApi.postLine( view , line )
     }
   }
 

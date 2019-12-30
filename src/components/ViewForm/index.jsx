@@ -61,7 +61,7 @@ export default class ViewForm extends Component {
           </div>
           <div className="buttons">
             <input type="submit" value="Salvar" className="save-button"/>
-            <Link to="/modelos" className="cancel-button">Cancelar</Link>
+            <Link to={`/dashboard/${this.idDashboard}`} className="cancel-button">Cancelar</Link>
           </div>
         </form>
       </Fragment>
