@@ -217,13 +217,10 @@ export default class BackEndApi extends Component {
   }
 
   putDevice(device, id) {
-    const url = `${this.BASE_URL}/devices/${id}`
-    return Axios.put(url, {
+    const url = `${this.BASE_URL}/devices/`
+    return Axios.put(url, {device},{
       headers: {
         Authorization: localStorage.getItem('Authorization')
-      },
-      data: {
-        device
       }
     }).then(resp => {
       return { success: true, device: resp.data }

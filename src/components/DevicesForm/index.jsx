@@ -27,7 +27,8 @@ export default class DevicesForm extends Component {
       device: {
         id: null,
         name: '',
-        IdModels: null
+        IdModels: null,
+        protocol: "http"
       }
     }
   }
@@ -37,13 +38,15 @@ export default class DevicesForm extends Component {
     if (respModels.success) {
       this.setState({ models: respModels.models })
     }
-    if (this.id >1) {
-      const device = await this.backEndApi.getDevice(this.id)
-      if(device.success)
-      this.setState({ device:device.device })
-      const mqtt = await this.backEndApi.getMqtt(this.id)
-      if (mqtt.success)
-        this.setState({ mqtt:mqtt.mqtt })
+    if (this.id >0) {
+      const deviceResp = await this.backEndApi.getDevice(this.id)
+      if(deviceResp.success)
+      this.setState({ device:deviceResp.device })
+      if (deviceResp.device.protocol == "mqtt") {
+        const mqtt = await this.backEndApi.getMqtt(this.id)
+        if (mqtt.success)
+          this.setState({ mqtt:mqtt.mqtt })
+      }
     }
   }
 
@@ -53,12 +56,12 @@ export default class DevicesForm extends Component {
     if (this.id==='new')
       await this.backEndApi.postDevice(device)
     else
-      await this.backEndApi.putDevice(device, device.id)
-    if (mqtt.id)
+      await this.backEndApi.putDevice(device)
+    if (mqtt.id && mqttTest)
       await this.backEndApi.postMqtt(mqtt)
     else if (mqttTest)
       await this.backEndApi.putMqtt(mqtt, mqtt.id)
-
+    this.props.history.push('/dispositivos')
   }
 
   handleStateChange(e) {
@@ -109,12 +112,12 @@ export default class DevicesForm extends Component {
                 <option value={model.id} key={index}>{model.name}</option>
               ))}
             </select>
-            <div className="mqttTest">
-              <input type='checkbox' checked={mqttTest} name="mqttTest" onChange={this.changeMqttTest.bind(this)} />
-              <p>Mqtt</p>
-            </div>
+            <select value={device.protocol || "http"} name="protocol" required onChange={this.changeDevicesStateValue.bind(this)}>
+                <option value="http">http</option>
+                <option value="mqtt">mqtt</option>
+            </select>
             <div className='mqtt-form'>
-              {mqttTest &&
+              {(device.protocol == "mqtt" &&
                 (<Fragment>
                   <input type="text" className="input-mqtt-form" placeholder='url do broker' name="url" value={mqtt.url} onChange={this.changeMqttStateValue.bind(this)} />
                   <input type="number" className="input-mqtt-form" placeholder='porta' name="port" value={mqtt.port} onChange={this.changeMqttStateValue.bind(this)} />
@@ -122,7 +125,11 @@ export default class DevicesForm extends Component {
                   <input type="text" className="input-mqtt-form" placeholder='cliente' name="clienteId" value={mqtt.clienteId} onChange={this.changeMqttStateValue.bind(this)} />
                   <input type="text" className="input-mqtt-form" placeholder='usuario' name="username" autoComplete="off" value={mqtt.username} onChange={this.changeMqttStateValue.bind(this)} />
                   <input type="text" className="input-mqtt-form" placeholder='password' name="password" autoComplete="off" value={mqtt.password} onChange={this.changeMqttStateValue.bind(this)} />
-                </Fragment>)
+                </Fragment>)) || (
+                  <Fragment>
+                    <p> envie os dados como metodo "POST" para: localhost:3000/meansuraments</p>
+                  </Fragment>
+                )
               }
             </div>
             <div className='buttons'>
