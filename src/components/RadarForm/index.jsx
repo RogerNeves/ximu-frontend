@@ -10,21 +10,26 @@ export default class RadarForm extends Component {
       radar:{
       type:undefined,
       idDevice1:0,
-      idDevice2:0,
-      modelsData:0,
+      compare:0,
+      data:0,
       divider:0
       },
-      devices:[{id:1,name:"casa"},{id:2,name:"estufa"}],
-      modelsData:[{id:1,name:"temperatura"},{id:2,name:"humidade"}]
+      devices:[],
+      modelsData:[]
     }
+  }
+
+  async componentDidMount() {
+    const devices = await this.backEndApi.getDevices()
+    this.setState(devices)
   }
 
   async submitRadarForm(){
     const {view} = this.props
     const {radar} = this.state
-    const { type, idDevice1, idDevice2, modelsData, divider } = radar
+    const { type, idDevice1, idDevice2, data, divider } = radar
     const {name} = view
-    if( type || modelsData || idDevice1 || idDevice2 || divider || name){
+    if( type || data || idDevice1 || idDevice2 || divider || name){
       const response = await this.backEndApi.postRadar( view , radar )
     }
   }
@@ -60,7 +65,7 @@ export default class RadarForm extends Component {
         </div>
         <div className="div-form">
           <p>Dado apresentado</p>
-        <select value={radar.modelsData} onChange={this.changeRadarStateValue.bind(this)} name="modelsData">
+        <select value={radar.data} onChange={this.changeRadarStateValue.bind(this)} name="data">
           {modelsData.map(( data, index )=>(
             <option value={data.id} key={index} >{data.name}</option>
           ))}

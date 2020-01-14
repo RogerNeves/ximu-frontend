@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from "react";
+import {Link} from 'react-router-dom'
 
 // import { Container } from './styles';
 
 export default class GaugeForm extends Component {
   constructor(props) {
     super(props);
+    this.idDashboard = props.idDashboard
     this.view = props.view;
     this.state = {
       gauge: {
@@ -25,13 +27,16 @@ export default class GaugeForm extends Component {
     };
   }
 
-  async submitGaugeForm(){
+  async submitGaugeForm(e){
+    e.preventDefault()
     const {view} = this.props
     const {gauge} = this.state
     const { type, idDevice, modelsData, min, max } = gauge
     const {name} = view
+    view.idDevice = idDevice
     if( type || modelsData || idDevice || min || max || name){
       const response = await this.backEndApi.postGauge( view , gauge )
+      console.log(response)
     }
   }
 
@@ -104,6 +109,10 @@ export default class GaugeForm extends Component {
           onChange={this.changeGaugeStateValue.bind(this)}
         />
         </div>
+        <div className="buttons">
+            <input type="submit" value="Salvar" className="save-button"/>
+            <Link to={`/dashboard/${this.idDashboard}`} className="cancel-button">Cancelar</Link>
+          </div>
       </Fragment>
     );
   }

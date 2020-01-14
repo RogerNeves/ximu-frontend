@@ -15,7 +15,13 @@ export default class ViewForm extends Component {
       id:props.id,
       name:"",
       type:"gauge",
+      idDashboard :props.idDashboard
     }
+  }
+
+  submitView(e){
+    e.preventDefault()
+    console.log(e)
   }
 
   handleStateChange(e) {
@@ -28,13 +34,13 @@ export default class ViewForm extends Component {
   form(){
     switch (this.state.type) {
       case "gauge":
-        return(<GaugeForm view={this.state}/>)
+        return(<GaugeForm idDashboard={this.idDashboard} history={this.props.history} view={this.state}/>)
       case "bar":
-        return(<BarForm view={this.state}/>)
+        return(<BarForm idDashboard={this.idDashboard} history={this.props.history} view={this.state}/>)
       case "line":
-        return(<LineForm view={this.state}/>)
+        return(<LineForm idDashboard={this.idDashboard} history={this.props.history} view={this.state}/>)
       case "radar":
-        return(<RadarForm view={this.state}/>)
+        return(<RadarForm idDashboard={this.idDashboard} history={this.props.history} view={this.state}/>)
       default:
         break;
     }
@@ -45,7 +51,7 @@ export default class ViewForm extends Component {
     return(
       <Fragment>
         <DialogBoxBackground close={`dashboard/${this.idDashboard}`}/>
-        <form action="" className="add-form view-form">
+        <form action="" className="add-form view-form" onSubmit={this.submitView.bind(this)}> 
           <input type="text" value={name} name="name" id="add-name" placeholder="Nome da visualização" onChange={this.handleStateChange.bind(this)}/>
           <div className="view-container">
           <div className="div-form">
@@ -58,10 +64,6 @@ export default class ViewForm extends Component {
             </select>
           </div>
           { this.form() }
-          </div>
-          <div className="buttons">
-            <input type="submit" value="Salvar" className="save-button"/>
-            <Link to={`/dashboard/${this.idDashboard}`} className="cancel-button">Cancelar</Link>
           </div>
         </form>
       </Fragment>

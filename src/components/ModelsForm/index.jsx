@@ -115,8 +115,8 @@ export default class ModelsForm extends Component {
             {datas.map((data, index) => (
               <Fragment key={index}>
                 <div className="data-input">
-                <input type="text" name="dataName" id={index} value={data.name} onChange={this.changeDataName.bind(this)} />
-                <select name="dataTypes" id={index} value={data.idDataType} onChange={this.changeDataType.bind(this)}>
+                <input type="text" name="dataName" readOnly={data.name =="createAt"?true:false} id={index} value={data.name} onChange={this.changeDataName.bind(this)} />
+                <select name="dataTypes" id={index} value={data.idDataType} readOnly={data.name =="createAt"?true:false} onChange={this.changeDataType.bind(this)}>
                   <option value={-1}>Selecione um tipo</option>
                   {dataTypes.map((dataType, index) => (
                     <option value={dataType.id} key={index} id={index}>{dataType.type}</option>

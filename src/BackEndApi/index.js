@@ -337,6 +337,19 @@ export default class BackEndApi extends Component {
     })
   }
 
+  getModelsDataByDevice(id) {
+    const url = `${this.BASE_URL}/modelsData?idDevice=${id}`
+    return Axios.get(url, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization')
+      }
+    }).then(resp => {
+      return { success: true, modelsData: resp.data }
+    }).catch(error => {
+      return { success: false, error }
+    })
+  }
+
   putModelsData(modelsData) {
     const url = `${this.BASE_URL}/modelsData/`
     return Axios.put(url, {
@@ -436,9 +449,35 @@ export default class BackEndApi extends Component {
     })
   }
 
+  postBar(view,bar) {
+    const url = `${this.BASE_URL}/bars`
+    return Axios.post(url, {view, bar} ,{
+      headers: {
+        Authorization: localStorage.getItem('Authorization')
+      }
+    }).then(resp => {
+      return { success: true, bar: resp.data }
+    }).catch(error => {
+      return { success: false, error }
+    })
+  }
+
   getLine(id) {
     const url = `${this.BASE_URL}/lines/${id}`
     return Axios.get(url, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization')
+      }
+    }).then(resp => {
+      return { success: true, line: resp.data }
+    }).catch(error => {
+      return { success: false, error }
+    })
+  }
+
+  postLine(view,line) {
+    const url = `${this.BASE_URL}/lines`
+    return Axios.post(url, {view, line} ,{
       headers: {
         Authorization: localStorage.getItem('Authorization')
       }

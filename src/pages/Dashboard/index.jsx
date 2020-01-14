@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
             })}
             <AddButton path={`${this.id}/view`} />
           </div>
-          {this.idView && (<ViewForm idView={this.idView} idDashboard={this.id}/>)}
+          {this.idView && (<ViewForm history={this.props.history} idView={this.idView} idDashboard={this.id}/>)}
         </section>
       </React.Fragment>)
   }
